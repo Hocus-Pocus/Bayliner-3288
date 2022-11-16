@@ -1,0 +1,347 @@
+;************************************************************************************************
+;*                                                                                              *
+;*      MC68HC908GP32 Definitions                                                               *
+;*                                                              Copyright (c) Motorola 2000     *
+;*                                                                                              *
+;************************************************************************************************
+;*                                                                                              *
+;*      File name:          gp32.equ                    Current Release Level:      1.0         *
+;*      Last Edit Date:     22-Feb-00                   Classification:             ES          *
+;*                                                                                              *
+;*      Include Files:      none                                                                *
+;*                                                                                              *
+;*      Assembler:          P&E's CASM08                Version:    3.06                        *
+;*                                                                                              *
+;*      Target Device:      MC68HC908GP32                                                       *
+;*                                                                                              *
+;*      Documentation:      MC68HC908GP32/H  Rev 3   Microcontroller Technical Data             *
+;*                                                                                              *
+;************************************************************************************************
+;*                                                                                              *
+;*      Author:             DHJ Klotz                   Location:   TOR                         *
+;*      First Release:      22-Feb-00                                                           *
+;*                                                                                              *
+;*      Update History:                                                                         *
+;*                                                                                              *
+;*      Rev     Date        Author  Description of Change                                       *
+;*      ------  ---------   ------  ----------------------------------------------------------  *
+;*      ES 1.0  22-Feb-00   DHJK    Initial release.                                            *
+;*                                                                                              *
+;*      ES 2.0  25-Apr-01   BAB     Fixed errors, and added new definitions                     *
+;*                                                                                              *
+;************************************************************************************************
+;*                                                                                              *
+;*      Motorola reserves the right to make changes without further notice to any product       *
+;*      herein to improve reliability, function, or design.  Motorola does not assume any       *
+;*      liability arising out of the application or use of any product, circuit, or software    *
+;*      described herein; neither does it convey any license under its patent rights nor the    *
+;*      rights of others.  Motorola products are not designed, intended, or authorized for      *
+;*      use as components in systems intended for surgical implant into the body, or other      *
+;*      applications intended to support life, or for any other application in which the        *
+;*      failure of the Motorola product could create a situation where personal injury or       *
+;*      death may occur.  Should Buyer purchase or use Motorola products for any such           *
+;*      intended or unauthorized application, Buyer shall indemnify and hold Motorola and       *
+;*      its officers, employees, subsidiaries, affiliates, and distributors harmless against    *
+;*      all claims, costs, damages, and expenses, and reasonable attorney fees arising out      *
+;*      of, directly or indirectly, any claim of personal injury or death associated with       *
+;*      such unintended or unauthorized use, even if such claim alleges that Motorola was       *
+;*      negligent regarding the design or manufacture of the part.                              *
+;*                                                                                              *
+;*      Motorola and the Motorola logo are registered trademarks of Motorola Ltd.               *
+;*                                                                                              *
+;************************************************************************************************
+
+;*  Memory Map and Interrupt Vectors  ***********************************************************
+;*
+ram_start:      equ     $0040               ; start of RAM
+ram_last:       equ     $023F               ; last RAM location
+rom_start:      equ     $8000               ; start of ROM
+rom_last:       equ     $FDFF               ; last ROM location
+;
+vec_timebase:   equ     $FFDC               ; Timebase vector
+vec_adc:        equ     $FFDE               ; ADC vector
+vec_kbd:        equ     $FFE0               ; Keyboard vector
+vec_scitx:      equ     $FFE2               ; SCI transmit vector
+vec_scirx:      equ     $FFE4               ; SCI receive vector
+vec_scierr:     equ     $FFE6               ; SCI error vector
+vec_spitx:      equ     $FFE8               ; SPI transmit vector
+vec_spirx:      equ     $FFEA               ; SPI receive vector
+vec_tim2ov:     equ     $FFEC               ; Timer 2 overflow vector
+vec_tim2ch1:    equ     $FFEE               ; Timer 2 channel 1 vector
+vec_tim2ch0:    equ     $FFF0               ; Timer 2 channel 0 vector
+vec_tim1ov:     equ     $FFF2               ; Timer 1 oveflow vector
+vec_tim1ch1:    equ     $FFF4               ; Timer 1 channel 1 vector
+vec_tim1ch0:    equ     $FFF6               ; Timer 1 channel 0 vector
+vec_pll:        equ     $FFF8               ; PLL vector
+vec_irq:        equ     $FFFA               ; IRQ vector
+vec_swi:        equ     $FFFC               ; SWI vector
+vec_reset:      equ     $FFFE               ; Reset vector
+
+;*  Input/Output (I/O) Ports  *******************************************************************
+;*
+porta:          equ     $00                 ; Port A Data Register
+portb:          equ     $01                 ; Port B Data Register
+portc:          equ     $02                 ; Port C Data Register
+portd:          equ     $03                 ; Port D Data Register
+ddra:           equ     $04                 ; Port A Data Direction Register
+ddrb:           equ     $05                 ; Port B Data Direction Register
+ddrc:           equ     $06                 ; Port C Data Direction Register
+ddrd:           equ     $07                 ; Port D Data Direction Register
+porte:          equ     $08                 ; Port E Data Register
+ddre:           equ     $0C                 ; Port E Data Direction Register
+ptapue:         equ     $0D                 ; Port A Input Pullup Enable Register
+ptcpue:         equ     $0E                 ; Port C Input Pullup Enable Register
+ptdpue:         equ     $0F                 ; Port D Input Pullup Enable Register
+
+;*  Serial Peripheral Interface Module (SPI)  ****************************************************
+;*
+spcr:           equ     $10                 ; SPI Control Register
+SPRIE:          equ     7                       ; SPI receiver interrupt enable bit
+SPMSTR:         equ     5                       ; SPI master bit
+CPOL:           equ     4                       ; clock polarity bit
+CPHA:           equ     3                       ; clock phase bit
+SPWOM:          equ     2                       ; SPI wired-or mode bit
+SPE:            equ     1                       ; SPI enable
+SPTIE:          equ     0                       ; SPI transmit interrupt enable
+;
+spscr:          equ     $11                 ; SPI Status and Control Register
+SPRF:           equ     7                       ; SPI receiver full bit
+ERRIE:          equ     6                       ; error interrupt enable bit
+OVRF:           equ     5                       ; overflow bit
+MODF:           equ     4                       ; mode fault bit
+SPTE:           equ     3                       ; SPI transmitter empty bit
+MODFEN:         equ     2                       ; mode fault enable bit
+SPR1:           equ     1                       ; SPI baud rate
+SPR0:           equ     0                       ;  select bits
+;
+spdr:           equ     $12                 ; SPI Data Register
+
+;*  Serial Communications Interface (SCI)  ******************************************************
+;*
+scc1:           equ     $13                 ; SCI Control Register 1
+LOOPS:          equ     7                       ; loop mode select bit
+ENSCI:          equ     6                       ; enable SCI bit
+TXINV:          equ     5                       ; transmit inversion bit
+M:              equ     4                       ; mode bit
+WAKE:           equ     3                       ; wakeup condition bit
+ILTY:           equ     2                       ; idle line type bit
+PEN:            equ     1                       ; parity enable bit
+PTY:            equ     0                       ; parity bit
+;
+scc2:           equ     $14                 ; SCI Control Register 2
+SCTIE:          equ     7                       ; SCI transmit interrupt enable bit
+TCIE:           equ     6                       ; transmission complete interrupt enable bit
+SCRIE:          equ     5                       ; SCI receive interrupt enable bit
+ILIE:           equ     4                       ; idle line interrupt enable bit
+TE:             equ     3                       ; transmitter enable bit
+RE:             equ     2                       ; receiver enable bit
+RWU:            equ     1                       ; receiver wakeup bit
+SBK:            equ     0                       ; send break bit
+;
+scc3:           equ     $15                 ; SCI Control Register 3
+R8:             equ     7                       ; received bit 8
+T8:             equ     6                       ; transmitted bit 8
+DMARE:          equ     5                       ; DMA receive enable bit
+DMATE:          equ     4                       ; DMA transfer enable bit
+ORIE:           equ     3                       ; receiver overrun interrupt enable bit
+NEIE:           equ     2                       ; receiver noise error interrupt enable bit
+FEIE:           equ     1                       ; receiver framing error interrupt enable bit
+PEIE:           equ     0                       ; receiver parity error interrupt enable bit
+;
+scs1:           equ     $16                 ; SCI Status Register 1
+SCTE:           equ     7                       ; SCI transmitter empty bit
+TC:             equ     6                       ; transmission complete bit
+SCRF:           equ     5                       ; SCI receiver full bit
+IDLE:           equ     4                       ; receiver idle bit
+OR:             equ     3                       ; receiver overrun bit
+NF:             equ     2                       ; receiver noise flag bit
+FE:             equ     1                       ; receiver framing error bit
+PE:             equ     0                       ; receiver parity error bit
+;
+scs2:           equ     $17                 ; SCI Status Register 2
+BKF:            equ     1                       ; break flag bit
+RPF:            equ     0                       ; reception in progress flag bit
+;
+scdr:           equ     $18                 ; SCI Data Register
+scbr:           equ     $19                 ; SCI Baud Rate Register
+
+;*  Keyboard Interrupt Module (KBI)  ************************************************************
+;*
+intkbscr:       equ     $1A                 ; Keyboard Status and Control Register
+KEYF:           equ     3                       ; keyboard flag bit
+ACKK:           equ     2                       ; keyboard acknowledge bit
+IMASKK:         equ     1                       ; keyboard interrupt mask bit
+MODEK:          equ     0                       ; keyboard triggering sensitivity bit
+;
+intkbier:       equ     $1B                 ; Keyboard Interrupt Enable Register
+KBIE7:          equ     7
+KBIE6:          equ     6
+KBIE5:          equ     5
+KBIE4:          equ     4
+KBIE3:          equ     3
+KBIE2:          equ     2
+KBIE1:          equ     1
+KBIE0:          equ     0
+
+;*  Timebase Module (TBM)  **********************************************************************
+;*
+tbcr:           equ     $1C                 ; Timebase Control Register
+TBIF:           equ     7                       ; timebase interrupt flag
+TBR2:           equ     6                       ; \
+TBR1:           equ     5                       ;  timebase rate selection
+TBR0:           equ     4                       ; /
+TACK:           equ     3                       ; timebase acknowledge
+TBIE:           equ     2                       ; timebase interrupt enable
+TBON:           equ     1                       ; timebase enabled
+
+;*  External Interrupt (IRQ)  *******************************************************************
+;*
+intscr:         equ     $1D                 ; IRQ Status and Control Register
+IRQF:           equ     3                       ; IRQ flag bit
+ACK:            equ     2                       ; IRQ interrupt request acknowledge bit
+IMASK:          equ     1                       ; IRQ interrupt mask bit
+MODE:           equ     0                       ; IRQ edge/level select bit
+
+;*  Configuration Registers (CONFIG)  ***********************************************************
+;*
+config2:        equ     $1E                 ; Configuration Register 2
+config1:        equ     $1F                 ; Configuration Register 1
+
+;*  Timer Interface module (TIM)  ***************************************************************
+;*
+t1sc:           equ     $20                 ; Timer 1 Status and Control Register
+t2sc:           equ     $2B                 ; Timer 2 Status and Control Register
+TOF:            equ     7                       ; TIM overflow flag bit
+TOIE:           equ     6                       ; TIM overflow interrupt enable bit
+TSTOP:          equ     5                       ; TIM stop bit
+TRST:           equ     4                       ; TIM reset bit
+PS2:            equ     2                       ; \
+PS1:            equ     1                       ;  prescaler select bits
+PS0:            equ     0                       ; /
+;
+t1sc0:          equ     $25                 ; Timer 1 Channel 0 Status and Control Register
+t1sc1:          equ     $28                 ; Timer 1 Channel 1 Status and Control Register
+t2sc0:          equ     $30                 ; Timer 2 Channel 0 Status and Control Register
+t2sc1:          equ     $33                 ; Timer 2 Channel 1 Status and Control Register
+CHxF:           equ     7                       ; channel x flag bit
+CHxIE:          equ     6                       ; channel x interrupt enable
+MSxB:           equ     5                       ; channel x mode select bit B
+MSxA:           equ     4                       ; channel x mode select bit A
+ELSxB:          equ     3                       ; channel x edge/level select bit B
+ELSxA:          equ     2                       ; channel x edge/level select bit A
+TOVx:           equ     1                       ; channel x toggle on overflow bit
+CHxMAX:         equ     0                       ; channel x maximum duty cycle bit
+;
+t1cnth:         equ     $21                 ; Timer 1 Counter Register
+t1cntl:         equ     $22                 ; Timer 1 Counter Register low
+t1modh:         equ     $23                 ; Timer 1 Counter Modulo Register
+t1modl:         equ     $24                 ; Timer 1 Counter Modulo Register Low
+t1ch0h:         equ     $26                 ; Timer 1 Channel 0 Register
+t1ch0l:         equ     $27                 ; Timer 1 Channel 0 Register
+t1ch1h:         equ     $29                 ; Timer 1 Channel 1 Register
+t1ch1l:         equ     $2A                 ; Timer 1 Channel 1 Register Low
+;
+t2cnth:         equ     $2C                 ; Timer 2 Counter Register high
+t2cntl:         equ     $2D                 ; Timer 2 Counter Register low
+t2modh:         equ     $2E                 ; Timer 2 Counter Module Register High
+t2modl:         equ     $2F                 ; Timer 2 Counter Module Register Low
+t2ch0h:         equ     $31                 ; Timer 2 Channel 0 Register High
+
+;t2ch0l:         equ     $33                 ; Timer 2 Channel 0 Register low
+t2ch0l:         equ     $32                 ; Timer 2 Channel 0 Register low
+
+t2ch1h:         equ     $34                 ; Timer 2 Channel 1 Register High
+
+
+
+t2ch1l:         equ     $35                 ; Timer 2 Channel 1 Register low
+
+;*  Clock Generator Module (CGMC)  **************************************************************
+;*
+pctl:           equ     $36                 ; PLL Control Register
+PLLIE:          equ     7                       ; PLL interrupt enable bit
+PLLF:           equ     6                       ; PLL interrupt flag bit
+PLLON:          equ     5                       ; PLL on bit
+BCS:            equ     4                       ; base clock select bit
+PRE1:           equ     3                       ; prescaler
+PRE0:           equ     2                       ;  program bits
+VPR1:           equ     1                       ; VCO power-of-two
+VPR0:           equ     0                       ;  range select bits
+;
+pbwc:           equ     $37                 ; PLL Bandwidth Control Register
+AUTO:           equ     7                       ; automatic bandwidth control bit
+LOCK:           equ     6                       ; lock indicator bit
+ACQ:            equ     5                       ; acquisition mode bit
+;
+pmsh:           equ     $38                 ; PLL Multiplier Select High Register
+pmsl:           equ     $39                 ; PLL Multiplier Select Low Register
+pmrs:           equ     $3A                 ; PLL VCO Select Range Register
+pmds:           equ     $3B                 ; PLL Reference Divider Select Register
+
+;*  Analog-to-Digital Converter (ADC)  **********************************************************
+;*
+adscr:          equ     $3C                 ; ADC Status and Control Register
+COCO:           equ     7                       ; conversions complete flag
+AIEN:           equ     6                       ; ADC interrupt enable bit
+ADCO:           equ     5                       ; ADC continuous conversion bit
+ADCH4:          equ     4                       ; \
+ADCH3:          equ     3                       ;  \
+ADCH2:          equ     2                       ;   ADC channel select bits
+ADCH1:          equ     1                       ;  /
+ADCH0:          equ     0                       ; /
+;
+adr:            equ     $3D                 ; ADC Data Register
+;
+adclk:          equ     $3E                 ; ADC Clock Register
+ADIV2:          equ     7                       ; \
+ADIV1:          equ     6                       ;  ADC clock prescaler bits
+ADIV0:          equ     5                       ; /
+ADICLK:         equ     4                       ; ADC input clock select bit
+
+;*  System Integration Module (SIM)  ************************************************************
+;*
+sbsr:           equ     $FE00               ; SIM Break Status Register
+SBSW:           equ     1                       ; SIM break stop/wait
+;
+srsr:           equ     $FE01               ; SIM Reset Status Register
+POR:            equ     7                       ; power-on reset bit
+PIN:            equ     6                       ; external reset bit
+COP:            equ     5                       ; COP reset bit
+ILOP:           equ     4                       ; illegal opcode reset bit
+ILAD:           equ     3                       ; illegal opcode address reset bit
+MODRST:         equ     2                       ; monitor mode entry module reset bit
+LVI:            equ     1                       ; LVI reset bit
+;
+subar:          equ     $FE02               ; SIM Upper Byte Address Register
+sbfcr:          equ     $FE03               ; SIM Break Flag Control Register
+BCFE:           equ     7                       ; break clear flag enable bit
+int1:           equ     $FE04               ; Interrupt Status Register 1
+int2:           equ     $FE05               ; Interrupt Status Register 2
+int3:           equ     $FE06               ; Interrupt Status Register 3
+
+;*  Flash Memory  *******************************************************************************
+;*
+flcr:           equ     $FE08               ; Flash Control Register
+HVEN:           equ     %00001000           ; high-voltage enable bit mask
+MASS:           equ     %00000100           ; mass erase control bit mask
+ERASE:          equ     %00000010           ; erase control bit mask
+PGM:            equ     %00000001           ; program control bit mask
+;
+flbpr:          equ     $FF7E               ; Flash Block Protect Register
+
+;*  Breakpoint Module (BRK)  ********************************************************************
+;*
+brkh:           equ     $FE09               ; Break Address Register High
+brkl:           equ     $FE0A               ; Break Address Register Low
+brkscr:         equ     $FE0B               ; Break Status and Control Register
+BRKE:           equ     7                       ; break enable bit
+BRKA:           equ     6                       ; break active bit
+
+;*  Low-Voltage Inhibit (LVI)  ******************************************************************
+;*
+lvisr:          equ     $FE0C               ; LVI Status Register
+LVIOUT:         equ     7                       ; LVI output bit
+
+;*  Computer Operating Properly (COP)  **********************************************************
+;*
+copctl:         equ     $FFFF               ; COP Control Register

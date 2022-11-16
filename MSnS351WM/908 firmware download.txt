@@ -1,0 +1,54 @@
+* Hyperterminal embedded software download instructions for older MS based codes:
+
+1 - Put the boot loader jumper pin in place on the MS PCB
+
+2 - Double click on the desk top red telephone icon entitled "Megasquirt" 
+
+3 - Apply power to MS. "Boot" prompt should appear on screen.
+
+3 - Type "H"
+
+4 - Type "W" to erase the flash array
+
+8 - Type "P" for program
+
+9 - Under "Transfer" menu, select "Send Text File"
+
+10 - Set "Files Type" to "All Files"
+
+11 - Browse to the .s19 file you want. Down load should take about 40 seconds with no activity on screen
+
+12 - The prompt will come back on screen which means download is complete
+
+13 - Power down MS. Close Hyperterminal. Remove bootloader jumper
+
+
+* MSnS code based embedded software download instructions for MSnS based codes:
+
+1 - Go to D:\Megasquirt\029y4
+
+2 - Click on the DOS program "Download Firmware"
+
+3 - Select "COM 1"
+
+4 - continue to follow instructions on screen
+
+
+* Programming a blank 908 or code with no bootloader (MV-ECU, MV-TECA, MS-SERVO, etc.:
+
+1 - Using the MEgaprogrammer and power supply, connect the serial cable to the PC and plug in the power supply
+
+2 - Plug the 908 into the programmer socket. (Pin 1 to the lever end)
+
+3 - Open the program "Prog08SZ"
+
+4 - If the dialog "rom secure" appears, select "ignore" and click "contact target with these settings"
+
+5 - If prompted, select "908gp32 high speed.08P" algorithm
+
+6 - Erase module
+
+7 - Specify "S" record and open
+
+8 - Click on "Program" 
+  
